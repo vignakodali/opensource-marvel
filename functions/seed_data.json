@@ -1,0 +1,184 @@
+{
+  "0": {
+    "backgroundImgURL": "https://firebasestorage.googleapis.com/v0/b/kai-ai-f63c8.appspot.com/o/Quizify.png?alt=media&token=d1255f27-b1a1-444e-b96a-4a3ac559237d",
+    "description": "Create a multiple choice quiz based on any topic and standard(s)",
+    "id": "0",
+    "inputs": [
+      {
+        "label": "Topic",
+        "name": "topic",
+        "placeholder": "Enter Topic",
+        "type": "text"
+      },
+      {
+        "defaultValue": "5",
+        "label": "Number of Questions",
+        "name": "n_questions",
+        "placeholder": "Enter No. Of Questions",
+        "type": "number"
+      },
+      {
+        "defaultValue": "en",
+        "label": "Language",
+        "name": "lang",
+        "placeholder": "Select Language",
+        "type": "select",
+        "values": [
+          {
+            "key": "en",
+            "label": "English"
+          },
+          {
+            "key": "fr",
+            "label": "French"
+          }
+        ]
+      },
+      {
+        "defaultValue": "PDF",
+        "label": "File Type",
+        "name": "file",
+        "placeholder": "Select File Type",
+        "type": "file_type_selector",
+        "values": [
+          {
+            "key": "PDF",
+            "label": "PDF"
+          },
+          {
+            "key": "CSV",
+            "label": "CSV"
+          },
+          {
+            "key": "TXT",
+            "label": "TXT"
+          },
+          {
+            "key": "MD",
+            "label": "Markdown (MD)"
+          },
+          {
+            "key": "URL",
+            "label": "Website URL"
+          },
+          {
+            "key": "PPTX",
+            "label": "PPTX"
+          },
+          {
+            "key": "DOCX",
+            "label": "DOCX"
+          },
+          {
+            "key": "XLS",
+            "label": "XLS / XLSX"
+          },
+          {
+            "key": "XML",
+            "label": "XML"
+          },
+          {
+            "key": "GOOGLE_DOCS",
+            "label": "GOOGLE DOCS"
+          },
+          {
+            "key": "GOOGLE_SHEETS",
+            "label": "GOOGLE SHEETS"
+          },
+          {
+            "key": "GOOGLE_SLIDES",
+            "label": "GOOGLE SLIDES"
+          },
+          {
+            "key": "GOOGLE_DRIVE",
+            "label": "GOOGLE DRIVE"
+          },
+          {
+            "key": "IMAGES",
+            "label": "IMAGES (PNG / JPG / JPEG)"
+          }
+        ]
+      }
+    ],
+    "logo": "https://firebasestorage.googleapis.com/v0/b/kai-ai-f63c8.appspot.com/o/QuizifyLogo.png?alt=media&token=9bf1d066-fba4-4063-9640-ef732e237d31",
+    "name": "Multiple Choice Quiz"
+  },
+  "1": {
+    "backgroundImgURL": "https://firebasestorage.googleapis.com/v0/b/kai-ai-f63c8.appspot.com/o/Dynamo.png?alt=media&token=db14183f-a294-49b2-a9de-0818b007c080",
+    "description": "Creates flash cards from any content.",
+    "id": "1",
+    "inputs": [
+      {
+        "defaultValue": "youtube_url",
+        "label": "File",
+        "name": "file",
+        "placeholder": "Select File Type",
+        "type": "file_type_selector",
+        "values": [
+          {
+            "key": "youtube_url",
+            "label": "Youtube URL"
+          },
+          {
+            "key": "PDF",
+            "label": "PDF"
+          },
+          {
+            "key": "CSV",
+            "label": "CSV"
+          },
+          {
+            "key": "TXT",
+            "label": "TXT"
+          },
+          {
+            "key": "MD",
+            "label": "Markdown (MD)"
+          },
+          {
+            "key": "URL",
+            "label": "Website URL"
+          },
+          {
+            "key": "PPTX",
+            "label": "PPTX"
+          },
+          {
+            "key": "DOCX",
+            "label": "DOCX"
+          },
+          {
+            "key": "XLS",
+            "label": "XLS / XLSX"
+          },
+          {
+            "key": "XML",
+            "label": "XML"
+          },
+          {
+            "key": "GOOGLE_DOCS",
+            "label": "GOOGLE DOCS"
+          },
+          {
+            "key": "GOOGLE_SHEETS",
+            "label": "GOOGLE SHEETS"
+          },
+          {
+            "key": "GOOGLE_SLIDES",
+            "label": "GOOGLE SLIDES"
+          },
+          {
+            "key": "GOOGLE_DRIVE",
+            "label": "GOOGLE DRIVE"
+          },
+          {
+            "key": "IMAGES",
+            "label": "IMAGES (PNG / JPG / JPEG)"
+          }
+        ]
+      }
+    ],
+    "logo": "https://firebasestorage.googleapis.com/v0/b/kai-ai-f63c8.appspot.com/o/YoutubeLogo.png?alt=media&token=2809083f-f816-41b6-8f86-80582b3da188",
+    "name": "FlashCards"
+  }
+}
