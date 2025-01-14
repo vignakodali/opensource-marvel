@@ -2,10 +2,12 @@ import { useContext, useState } from 'react';
 
 import { Grid, useTheme } from '@mui/material';
 import { FormContainer } from 'react-hook-form-mui';
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
 import AuthTextField from '@/components/AuthTextField';
 
 import GradientOutlinedButton from '@/components/GradientOutlinedButton';
+import { auth } from "@/redux/store"; // Firebase auth instance
 
 import styles from './styles';
 
@@ -153,6 +155,46 @@ const SignUpForm = (props) => {
         setLoading(false);
       }
     }
+  };
+  const handleGoogleSignUp = async () => {
+    const provider = new GoogleAuthProvider();
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+
+      handleOpenSnackBar(
+        ALERT_COLORS.SUCCESS,
+        "Account created successfully with Google"
+      );
+
+      setEmail(user.email);
+      handleSwitch();
+    } catch (error) { //to check error
+      console.error("Google Sign-Up Error: ", error.message);
+      handleOpenSnackBar(
+        ALERT_COLORS.ERROR,
+        error.message || "An error occurred during Google Sign-Up"
+      );
+    }
+  };
+
+  const renderGoogleSignUpButton = () => {
+    return (
+      <Button
+        onClick={handleGoogleSignUp}
+        variant="contained"
+        sx={{
+          backgroundColor: "#4285F4",
+          color: "white",
+          mt: 2,
+          "&:hover": {
+            backgroundColor: "#357ae8",
+          },
+        }}
+      >
+        Sign Up with Google
+      </Button>
+    );
   };
 
   const renderEmailInput = () => {

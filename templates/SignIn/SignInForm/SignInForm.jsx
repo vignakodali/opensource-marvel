@@ -22,6 +22,8 @@ import { AuthContext } from '@/libs/providers/GlobalProvider';
 import { setLoading } from '@/libs/redux/slices/authSlice';
 import { auth, firestore } from '@/libs/redux/store';
 import fetchUserData from '@/libs/redux/thunks/user';
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import ReCAPTCHA from 'react-google-recaptcha';
 
 import AUTH_REGEX from '@/libs/regex/auth';
 
@@ -79,6 +81,19 @@ const SignInForm = (props) => {
         setError({ password: { message: 'Password is required' } });
         return;
       }
+      // Check if reCAPTCHA is completed
+      if (!recaptchaValue) {
+        handleOpenSnackBar(ALERT_COLORS.ERROR, "Please complete the reCAPTCHA.");
+        return;
+      }
+
+      // Send reCAPTCHA token to your backend for verification
+      const recaptchaVerified = await verifyRecaptchaToken(recaptchaValue);
+
+      if (!recaptchaVerified) {
+        handleOpenSnackBar(ALERT_COLORS.ERROR, "reCAPTCHA verification failed.");
+        return;
+      }
 
       // Sign in user
       setSignInLoading(true);
@@ -110,6 +125,56 @@ const SignInForm = (props) => {
       setSignInLoading(false);
     }
   };
+//To  Handle Google Sign-In
+const handleGoogleSignIn = async () => {
+  const provider = new GoogleAuthProvider();
+  try {
+    setSignInLoading(true);
+    const result = await signInWithPopup(auth, provider);
+    const user = result.user;
+
+    // Dispatch user data to Redux
+    dispatch(setLoading(true));
+    const userData = await dispatch(
+      fetchUserData({ firestore, id: user.uid })
+    ).unwrap();
+
+    if (userData?.needsBoarding) {
+      router.replace(ROUTES.ONBOARDING);
+    } else {
+      router.replace(ROUTES.HOME);
+    }
+  } catch (error) {
+    console.error("Google Sign-In Error: ", error.message);
+    handleOpenSnackBar(
+      ALERT_COLORS.ERROR,
+      error.message || "An error occurred during Google Sign-In"
+    );
+  } finally {
+    setSignInLoading(false);
+  }
+};
+// Function to verify reCAPTCHA token in the backend
+const verifyRecaptchaToken = async (token) => {
+  try {
+    const response = await fetch('/api/verify-recaptcha', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ token }),
+    });
+    const data = await response.json();
+    return data.success;
+  } catch (error) {
+    console.error("Error verifying reCAPTCHA:", error);
+    return false;
+  }
+};
+
+const onRecaptchaChange = (value) => {
+  setRecaptchaValue(value);
+};
 
   const renderEmailInput = () => {
     return (
